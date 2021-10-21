@@ -1,0 +1,17 @@
+{
+    "name": "emag/hero",
+    "description": "project",
+    "type": "project",
+    "require": {},
+    "authors": [
+        {
+            "name": "Ionela Rusu",
+            "email": "rusuionela06@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
