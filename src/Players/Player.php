@@ -2,14 +2,13 @@
 
 namespace App\Players;
 
+use App\Stats;
+
 abstract class Player
 {
     protected string $name;
+    protected Stats $stats;
 
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
 
     abstract protected function attack(): int;
 

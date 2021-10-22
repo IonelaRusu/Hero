@@ -13,9 +13,9 @@ class PlayerFactory
             return null;
         }
 
-        if ($playerType === 'Orderus'){
+        if ($playerType === 'Orderus') {
             return new Orderus($playerType);
-        } else if($playerType === 'Beast'){
+        } elseif ($playerType === 'Beast') {
             return new Beast($playerType);
         }
 

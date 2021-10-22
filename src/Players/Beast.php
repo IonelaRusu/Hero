@@ -2,8 +2,16 @@
 
 namespace App\Players;
 
+use App\Stats;
+
 class Beast extends Player
 {
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+        $this->stats = new Stats(BEAST_STATS);
+    }
+
     protected function attack(): int
     {
         // TODO: Implement attack() method.

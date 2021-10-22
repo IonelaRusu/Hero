@@ -7,8 +7,8 @@ use App\Strategies\StartStrategy;
 class Game
 {
     protected StartStrategy $strategy;
-    protected Battle $battle;
     protected PlayerFactory $playerFactory;
+    protected Battle $battle;
 
     public function __construct(StartStrategy $strategy)
     {
