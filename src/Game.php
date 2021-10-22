@@ -21,16 +21,6 @@ class Game
         $this->factoryProducer = new FactoryProducer();
     }
 
-
-
-//    public function start($playersOrder)
-//    {
-//        $firstPlayer = $this->playerFactory->getPlayer($playersOrder[0]);
-//        $secondPlayer = $this->playerFactory->getPlayer($playersOrder[1]);
-//        $this->battle = new Battle($firstPlayer, $secondPlayer);
-//        $this->battle->fight();
-//    }
-
     public function start() {
         $this->createPlayers();
         $this->initiateBattle();
@@ -49,13 +39,17 @@ class Game
     public function initiateBattle()
     {
         $battle = new Battle($this->heroPlayer, $this->villainPlayer, new HighestSpeedStartStrategy());
-        $playersOrder = $battle->getThePlayersOrder();
+        $playersOrder = $battle->getPlayersOrderByStrategy();
 
         if (empty($playersOrder)) {
             $battle->setStrategy(new HighestLuckStartStrategy());
+            $playersOrder = $battle->getPlayersOrderByStrategy();
+
+            if (empty($playersOrder)) {
+                //check if still no players order, throw error
+            }
+
+            $battle->fight($playersOrder['order']['first'], $playersOrder['order']['second']);
         }
-
-        //check if still no players order, throw error
-
     }
 }

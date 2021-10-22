@@ -12,23 +12,9 @@ class Orderus extends Hero
         $this->name = 'Orderus';
         $this->stats = new Stats(ORDERUS_STATS);
     }
-    protected function attack(): int
-    {
-        // TODO: Implement attack() method.
-    }
 
-    protected function defend(): int
+    public function attack(): int
     {
-        // TODO: Implement defend() method.
-    }
-
-    protected function lose(): string
-    {
-        // TODO: Implement lose() method.
-    }
-
-    protected function win(): string
-    {
-        // TODO: Implement win() method.
+//       return $this->stats->getStrength();
     }
 }

@@ -10,17 +10,26 @@ abstract class Player
     protected string $type;
     protected Stats $stats;
 
-    abstract protected function attack(): int;
+    abstract public function attack(): int;
 
-    abstract protected function defend(): int;
+    public function defend(int $damage): int
+    {
+        $newHealth = $this->getStats()->getHealth() - $damage;
+        $this->getStats()->setHealth($newHealth);
+    }
 
-    protected function lose(): string
+    public function lose(): string
     {
         return $this->name . " wins!";
     }
 
-    protected function win(): string
+    public function win(): string
     {
         return $this->name . " loses!";
+    }
+
+    public function getStats(): Stats
+    {
+        return $this->stats;
     }
 }

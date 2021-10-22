@@ -7,5 +7,5 @@ use App\Players\Villains\Villain;
 
 interface StartStrategy
 {
-    public function getPlayersOrderStrategy(Hero $heroPlayer, Villain $villainPlayer): array;
+    public function getPlayersOrder(Hero $heroPlayer, Villain $villainPlayer): array;
 }

@@ -59,4 +59,64 @@ class Stats
         return $this->luck;
     }
 
+    /**
+     * @param int $health
+     *
+     * @return Stats
+     */
+    public function setHealth(int $health): Stats
+    {
+        $this->health = $health;
+
+        return $this;
+    }
+
+    /**
+     * @param int $strength
+     *
+     * @return Stats
+     */
+    public function setStrength(int $strength): Stats
+    {
+        $this->strength = $strength;
+
+        return $this;
+    }
+
+    /**
+     * @param int $defence
+     *
+     * @return Stats
+     */
+    public function setDefence(int $defence): Stats
+    {
+        $this->defence = $defence;
+
+        return $this;
+    }
+
+    /**
+     * @param int $speed
+     *
+     * @return Stats
+     */
+    public function setSpeed(int $speed): Stats
+    {
+        $this->speed = $speed;
+
+        return $this;
+    }
+
+    /**
+     * @param int $luck
+     *
+     * @return Stats
+     */
+    public function setLuck(int $luck): Stats
+    {
+        $this->luck = $luck;
+
+        return $this;
+    }
+
 }

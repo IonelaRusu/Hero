@@ -7,7 +7,7 @@ use App\Players\Villains\Villain;
 
 class HighestLuckStartStrategy implements StartStrategy
 {
-    public function getPlayersOrderStrategy(Hero $heroPlayer, Villain $villainPlayer): array
+    public function getPlayersOrder(Hero $heroPlayer, Villain $villainPlayer): array
     {
         if ($heroPlayer->getStats()->getLuck() === $villainPlayer->getStats()->getLuck()) {
             return [];

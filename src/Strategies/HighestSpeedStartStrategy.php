@@ -8,7 +8,7 @@ use App\Players\Villains\Villain;
 class HighestSpeedStartStrategy implements StartStrategy
 {
 
-    public function getPlayersOrderStrategy(Hero $heroPlayer, Villain $villainPlayer): array
+    public function getPlayersOrder(Hero $heroPlayer, Villain $villainPlayer): array
     {
         if ($heroPlayer->getStats()->getSpeed() === $villainPlayer->getStats()->getSpeed()) {
             return [];
