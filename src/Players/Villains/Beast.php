@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Players;
+namespace App\Players\Villains;
 
 use App\Stats;
 
-class Orderus extends Player
+class Beast extends Villain
 {
-    public function __construct(string $name)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->stats = new Stats(ORDERUS_STATS);
+        parent::__construct();
+        $this->name = 'Beast';
+        $this->stats = new Stats(BEAST_STATS);
     }
 
     protected function attack(): int
@@ -30,5 +31,10 @@ class Orderus extends Player
     protected function win(): string
     {
         // TODO: Implement win() method.
+    }
+
+    public function getStats(): Stats
+    {
+        return $this->stats;
     }
 }

@@ -2,10 +2,22 @@
 
 namespace App\Strategies;
 
+use App\Players\Heroes\Hero;
+use App\Players\Villains\Villain;
+
 class HighestSpeedStartStrategy implements StartStrategy
 {
-    public function getPlayersOrderStrategy(): array
+
+    public function getPlayersOrderStrategy(Hero $heroPlayer, Villain $villainPlayer): array
     {
-        return ['Orderus', 'Beast'];
+        if ($heroPlayer->getStats()->getSpeed() === $villainPlayer->getStats()->getSpeed()) {
+            return [];
+        }
+
+        if ($heroPlayer->getStats()->getSpeed() > $villainPlayer->getStats()->getSpeed()) {
+            return ['order' => ['first' => $heroPlayer, 'second' => $villainPlayer]];
+        } else {
+            return ['order' => ['first' => $villainPlayer, 'second' => $heroPlayer]];
+        }
     }
 }

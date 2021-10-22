@@ -2,17 +2,31 @@
 
 namespace App;
 
-use App\Players\Player;
+use App\Players\Heroes\Hero;
+use App\Players\Villains\Villain;
+use App\Strategies\StartStrategy;
 
 class Battle
 {
-    protected Player $firstPlayer;
-    protected Player $secondPlayer;
+    protected StartStrategy $strategy;
+    protected Hero $heroPlayer;
+    protected Villain $villainPlayer;
 
-    public function __construct(Player $firstPlayer, Player $secondPlayer)
+    public function __construct(Hero $heroPlayer, Villain $villainPlayer, StartStrategy $strategy)
     {
-        $this->firstPlayer = $firstPlayer;
-        $this->secondPlayer = $secondPlayer;
+        $this->heroPlayer = $heroPlayer;
+        $this->villainPlayer = $villainPlayer;
+        $this->strategy = $strategy;
+    }
+
+    public function setStrategy(StartStrategy $strategy)
+    {
+        $this->strategy = $strategy;
+    }
+
+    public function getThePlayersOrder(): array
+    {
+        return $this->strategy->getPlayersOrderStrategy($this->heroPlayer, $this->villainPlayer);
     }
 
     public function fight() {

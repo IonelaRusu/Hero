@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Players;
+namespace App\Players\Heroes;
 
 use App\Stats;
 
-class Beast extends Player
+class Orderus extends Hero
 {
-    public function __construct(string $name)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->stats = new Stats(BEAST_STATS);
+        parent::__construct();
+        $this->name = 'Orderus';
+        $this->stats = new Stats(ORDERUS_STATS);
     }
-
     protected function attack(): int
     {
         // TODO: Implement attack() method.

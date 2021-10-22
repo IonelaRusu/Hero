@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Players;
+namespace App\Players\Villains;
 
 use App\Stats;
 
-abstract class Player
+abstract class Villain
 {
     protected string $name;
     protected string $type;
     protected Stats $stats;
+
+    public function __construct()
+    {
+        $this->type = 'Villain';
+    }
 
     abstract protected function attack(): int;
 
@@ -16,11 +21,11 @@ abstract class Player
 
     protected function lose(): string
     {
-        return $this->name . " wins!";
+        // TODO: Implement lose() method.
     }
 
     protected function win(): string
     {
-        return $this->name . " loses!";
+        // TODO: Implement win() method.
     }
 }
