@@ -8,7 +8,6 @@ use App\Strategies\StartStrategy;
 class Battle
 {
     protected StartStrategy $strategy;
-    protected Round         $roundDetails;
 
     public function __construct(StartStrategy $strategy)
     {
@@ -31,37 +30,47 @@ class Battle
         $roundNumber = 1;
         do {
             if ($roundNumber % 2 === 1) {
-                $this->generateRound($firstPlayer, $secondPlayer);
+                $this->generateRound($firstPlayer, $secondPlayer, $roundNumber);
             } else {
-                $this->generateRound($secondPlayer, $firstPlayer);
+                $this->generateRound($secondPlayer, $firstPlayer, $roundNumber);
             }
 
             $this->getFightDetails($firstPlayer, $secondPlayer, $roundNumber);
+
+            $firstPlayerHealth = $firstPlayer->getStats()->getHealth();
+            $secondPlayerHealth = $secondPlayer->getStats()->getHealth();
+
+            if ($firstPlayerHealth === 0 || $secondPlayerHealth === 0) {
+                break;
+            }
+
             $roundNumber++;
-        } while ($roundNumber > 20);
+        } while ($roundNumber <= 20);
     }
 
-    private function generateRound(Player $attacker, Player $defender)
+    private function generateRound(Player $attacker, Player $defender, $roundNumber)
     {
-        $round = new Round($attacker, $defender);
-        $roundDefenderLuck = rand(0, 100);
+        $round = new Round($attacker, $defender, $roundNumber);
 
+        $roundDefenderLuck = rand(0, 100);
         if ($roundDefenderLuck <= $defender->getStats()->getLuck()) {
             $round->setIsDefenderLucky(true);
         } else {
             $finalDamage = 0;
+            $round->setIsDefenderLucky(false);
             $attackerStrength = $this->getAttackerStrengthInCurrentRound($attacker, $round);
             $defenderDefence = $defender->getStats()->getDefence();
 
             if ($attackerStrength > $defenderDefence) {
                 $damage = $attackerStrength - $defenderDefence;
-                $finalDamage = $this->getDefenderDamageInCurrentRound($defender, $damage);
+                $round->setDamage($damage);
+                $finalDamage = $this->getDefenderDamageInCurrentRound($defender, $round);
             }
 
             $round->setDamage($finalDamage);
         }
 
-        $this->roundDetails->printRoundEvents();
+        $round->printRoundEvents();
     }
 
     private function getAttackerStrengthInCurrentRound(Player $attacker, Round $round)
@@ -70,7 +79,7 @@ class Battle
 
         if (!empty($attackerSkills)) {
             foreach ($attackerSkills as $skill) {
-                if ($skill->getType() === 'attack') {
+                if ($skill->getType() === "attack") {
                     $attackerSkillChance = rand(0, 100);
                     if ($attackerSkillChance <= $skill->getChance()) {
                         $round->setAttackerSkillsUsed($skill->getName());
@@ -78,9 +87,10 @@ class Battle
                     }
                 }
             }
-        } else {
-            return $attacker->attack();
         }
+        $round->setAttackerSkillsUsed(null);
+        return $attacker->attack();
+
     }
 
     private function getDefenderDamageInCurrentRound(Player $defender, Round $round)
@@ -89,17 +99,18 @@ class Battle
 
         if (!empty($defenderSkills)) {
             foreach ($defenderSkills as $skill) {
-                $defenderSkillChance = rand(0, 100);
-                if ($skill->getType() === 'attack') {
+                if ($skill->getType() === "defence") {
+                    $defenderSkillChance = rand(0, 100);
                     if ($defenderSkillChance <= $skill->getChance()) {
                         $round->setDefenderSkillsUsed($skill->getName());
                         return $defender->defend($round, $skill);
                     }
                 }
             }
-        } else {
-            return $defender->defend($round);
         }
+
+        $round->setDefenderSkillsUsed(null);
+        return $defender->defend($round);
     }
 
     private function getFightDetails(Player $firstPlayer, Player $secondPlayer, int $round)
@@ -107,12 +118,12 @@ class Battle
         $firstPlayerHealth = $firstPlayer->getStats()->getHealth();
         $secondPlayerHealth = $secondPlayer->getStats()->getHealth();
 
-        if ($firstPlayerHealth < 0) {
+        if ($firstPlayerHealth === 0) {
             $secondPlayer->win();
             $firstPlayer->lose();
         }
 
-        if ($secondPlayerHealth < 0) {
+        if ($secondPlayerHealth === 0) {
             $firstPlayer->win();
             $secondPlayer->lose();
         }

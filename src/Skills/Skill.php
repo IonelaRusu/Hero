@@ -6,8 +6,8 @@ use App\Round;
 abstract class Skill
 {
     protected int $chance;
-    protected int $type;
-    protected int $name;
+    protected string $type;
+    protected string  $name;
 
     abstract public function effect(Round $round): int;
 
@@ -20,19 +20,44 @@ abstract class Skill
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getType(): int
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @return int
+     * @param string $type
+     *
+     * @return Skill
      */
-    public function getName(): int
+    public function setType(string $type): Skill
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
         return $this->name;
     }
+
+    /**
+     * @param string $name
+     *
+     * @return Skill
+     */
+    public function setName(string $name): Skill
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
 
 }

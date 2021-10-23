@@ -3,21 +3,22 @@
 namespace App;
 
 use App\Players\Player;
-use App\Skills\Skill;
 
 class Round
 {
     protected Player $attacker;
     protected Player $defender;
     protected int $damage;
-    protected array $attackerSkillsUsed;
-    protected array $defenderSkillsUsed;
-    protected int $isDefenderLucky;
+    protected ?string $attackerSkillsUsed;
+    protected ?string $defenderSkillsUsed;
+    protected bool $isDefenderLucky;
+    protected int $roundNumber;
 
-    public function __construct(Player $attacker, Player $defender)
+    public function __construct(Player $attacker, Player $defender, int $roundNumber)
     {
         $this->attacker = $attacker;
         $this->defender = $defender;
+        $this->roundNumber = $roundNumber;
     }
 
     /**
@@ -81,19 +82,19 @@ class Round
     }
 
     /**
-     * @return array
+     * @return string|null
      */
-    public function getAttackerSkillsUsed(): array
+    public function getAttackerSkillsUsed(): ?string
     {
         return $this->attackerSkillsUsed;
     }
 
     /**
-     * @param array $attackerSkillsUsed
+     * @param string|null $attackerSkillsUsed
      *
      * @return Round
      */
-    public function setAttackerSkillsUsed(array $attackerSkillsUsed): Round
+    public function setAttackerSkillsUsed(?string $attackerSkillsUsed): Round
     {
         $this->attackerSkillsUsed = $attackerSkillsUsed;
 
@@ -101,39 +102,41 @@ class Round
     }
 
     /**
-     * @return array
+     * @return string|null
      */
-    public function getDefenderSkillsUsed(): array
+    public function getDefenderSkillsUsed(): ?string
     {
         return $this->defenderSkillsUsed;
     }
 
     /**
-     * @param array $defenderSkillsUsed
+     * @param string|null $defenderSkillsUsed
      *
      * @return Round
      */
-    public function setDefenderSkillsUsed(array $defenderSkillsUsed): Round
+    public function setDefenderSkillsUsed(?string $defenderSkillsUsed): Round
     {
         $this->defenderSkillsUsed = $defenderSkillsUsed;
 
         return $this;
     }
 
+
+
     /**
-     * @return int
+     * @return bool
      */
-    public function getIsDefenderLucky(): int
+    public function getIsDefenderLucky(): bool
     {
         return $this->isDefenderLucky;
     }
 
     /**
-     * @param int $isDefenderLucky
+     * @param bool $isDefenderLucky
      *
      * @return Round
      */
-    public function setIsDefenderLucky(int $isDefenderLucky): Round
+    public function setIsDefenderLucky(bool $isDefenderLucky): Round
     {
         $this->isDefenderLucky = $isDefenderLucky;
 
@@ -146,22 +149,36 @@ class Round
         $attackerName = $this->attacker->getName();
         $defenderName = $this->defender->getName();
 
-        echo $attackerName . 'attacks';
+        echo "<br>" . "<b>" . "------- Round " . $this->roundNumber . "</b>" . " begins: -------" . "<br>";
+        echo "<b>", $attackerName . "</b>" . " attacks" . "<br>";
 
         if ($this->isDefenderLucky) {
-            echo $attackerName . ' miss his hit and the' . $defenderName . ' takes no damage';
+            echo "<b>" . $attackerName . "</b>" . " miss his hit and the " . "<b>" . $defenderName . "</b>"
+                . " takes no damage" . "<br>";
+
+            echo "<b>" . $defenderName . "</b>" . " has "
+                . $this->defender->getStats()->getHealth() . " health left" . "<br>";
+
         } else {
             if (!empty($this->attackerSkillsUsed)) {
-                echo $attackerName . 'uses '. $this->attackerSkillsUsed .' skill';
+                echo "<b>" . $attackerName . "</b>" . " uses " . $this->attackerSkillsUsed . " skill" . "<br>";
             }
 
             if (!empty($this->defenderSkillsUsed)) {
-                echo $defenderName . 'uses '. $this->defenderSkillsUsed .' skill';
+                echo "<b>" . $defenderName . "</b>" . " uses " . $this->defenderSkillsUsed . " skill" . "<br>";
             }
 
-            echo $defenderName . 'takes ' . $this->damage . ' damage';
+            if ($this->damage === 0) {
+                echo  "<b>" . $attackerName . "</b>" . " has the strength " . $this->attacker->getStats()->getStrength()
+                    . " which is lower than " . "<b>" . $defenderName . "</b>" . " defence which is "
+                    . $this->defender->getStats()->getDefence() . " so there is no damage " . "<br>";
+                echo "<b>" . $defenderName . "</b>" . " takes " . $this->damage . " damage" . "<br>";
+            } else {
+                echo "<b>" . $defenderName . "</b>" . " takes " . $this->damage . " damage" . "<br>";
+            }
 
-            echo $defenderName . 'has ' . $this->defender->getStats()->getHealth() . ' left';
+            echo "<b>" . $defenderName . "</b>" . " has "
+                . $this->defender->getStats()->getHealth() . " health left" . "<br>";
         }
     }
 }

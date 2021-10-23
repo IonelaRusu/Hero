@@ -9,11 +9,11 @@ use App\Stats;
 
 abstract class Player
 {
-    protected string $name;
-    protected string $type;
-    protected Stats $stats;
+    protected string               $name;
+    protected string               $type;
+    protected Stats                $stats;
     protected SkillFactoryProducer $skillFactoryProducer;
-    protected array $skills;
+    protected array                $skills;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ abstract class Player
         return $this->stats->getStrength();
     }
 
-    public function defend(Round $round , Skill $skill = null): int
+    public function defend(Round $round, Skill $skill = null): int
     {
         $finalDamage = $round->getDamage();
         if (!is_null($round) && !is_null($skill)) {
@@ -37,19 +37,23 @@ abstract class Player
         }
 
         $newHealth = $this->getStats()->getHealth() - $finalDamage;
-        $this->getStats()->setHealth($newHealth);
+        if ($newHealth < 0) {
+            $this->getStats()->setHealth(0);
+        } else {
+            $this->getStats()->setHealth($newHealth);
+        }
 
         return $finalDamage;
     }
 
-    public function lose(): string
+    public function lose()
     {
-        return $this->name . " wins!";
+        echo "<br>" . "<b>" . $this->name . " loses!" . "</b>" . "<br>";
     }
 
-    public function win(): string
+    public function win()
     {
-        return $this->name . " loses!";
+        echo "<br>". "<b>" . $this->name . " wins!" . "</b>" . "<br>";
     }
 
     public function getStats(): Stats
@@ -83,17 +87,19 @@ abstract class Player
 
     public function generateSkills($playerDefinedSkills): array
     {
+
         if (empty($playerDefinedSkills)) {
             return [];
         }
 
         $skills = [];
-        foreach($playerDefinedSkills as $skillType) {
-            $typeSkillFactory =  $this->skillFactoryProducer->getFactory(key($skillType));
-            foreach($skillType as $skillName) {
+        foreach ($playerDefinedSkills as $skillType => $skill) {
+            $typeSkillFactory = $this->skillFactoryProducer->getFactory($skillType);
+            foreach ($skill as $skillName) {
                 array_push($skills, $typeSkillFactory->getSkill($skillName));
             }
         }
+
         return $skills;
     }
 }

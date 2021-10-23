@@ -4,5 +4,5 @@ namespace App\Skills;
 
 abstract class AbstractSkillFactory
 {
-    abstract public function getSkill(string $skillName);
+    abstract public function getSkill(string $skillName): ?Skill;
 }

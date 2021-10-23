@@ -13,7 +13,7 @@ class AttackSkillFactory extends AbstractSkillFactory
             return null;
         }
 
-        if ($skillName === 'RapidStrike') {
+        if ($skillName === "RapidStrike") {
             return new RapidStrike();
         }
 

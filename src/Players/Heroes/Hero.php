@@ -8,6 +8,7 @@ abstract class Hero extends Player
 {
     public function __construct()
     {
-        $this->type = 'Hero';
+        parent::__construct();
+        $this->type = "Hero";
     }
 }

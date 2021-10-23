@@ -3,16 +3,17 @@
 namespace App\Players\Villains;
 
 use App\Players\AbstractPlayerFactory;
+use App\Players\Player;
 
 class VillainFactory extends AbstractPlayerFactory
 {
-    public function getPlayer(string $playerName): ?Villain
+    public function getPlayer(string $playerName): ?Player
     {
         if ($playerName === null) {
             return null;
         }
 
-        if ($playerName === 'Beast') {
+        if ($playerName === "Beast") {
             return new Beast();
         }
 

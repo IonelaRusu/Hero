@@ -7,11 +7,11 @@ use App\Skills\Defence\DefenceSkillFactory;
 
 class SkillFactoryProducer
 {
-    public function getFactory($skillType) {
-        if ($skillType === 'attack'){
+    public function getFactory($skillType): AbstractSkillFactory {
+        if ($skillType === "attack"){
             return new AttackSkillFactory();
         }
-        if ($skillType === 'defence'){
+        if ($skillType === "defence"){
             return new DefenceSkillFactory();
         }
     }

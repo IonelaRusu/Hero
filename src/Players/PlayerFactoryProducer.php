@@ -5,14 +5,14 @@ namespace App\Players;
 use App\Players\Heroes\HeroFactory;
 use App\Players\Villains\VillainFactory;
 
-class FactoryProducer
+class PlayerFactoryProducer
 {
-    public function getFactory($playerType) {
-        if($playerType === 'Hero'){
+    public function getFactory($playerType): AbstractPlayerFactory
+    {
+        if ($playerType === "Hero") {
             return new HeroFactory();
-        }else{
+        } else {
             return new VillainFactory();
         }
     }
-
 }

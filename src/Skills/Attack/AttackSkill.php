@@ -8,6 +8,6 @@ abstract class AttackSkill extends Skill
 {
     public function __construct()
     {
-        $this->type = 'attack';
+        $this->type = "attack";
     }
 }

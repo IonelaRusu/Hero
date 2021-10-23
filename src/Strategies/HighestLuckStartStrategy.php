@@ -2,21 +2,20 @@
 
 namespace App\Strategies;
 
-use App\Players\Heroes\Hero;
-use App\Players\Villains\Villain;
+use App\Players\Player;
 
 class HighestLuckStartStrategy implements StartStrategy
 {
-    public function getPlayersOrder(Hero $heroPlayer, Villain $villainPlayer): array
+    public function getPlayersOrder(Player $heroPlayer, Player $villainPlayer): array
     {
         if ($heroPlayer->getStats()->getLuck() === $villainPlayer->getStats()->getLuck()) {
             return [];
         }
 
         if ($heroPlayer->getStats()->getLuck() > $villainPlayer->getStats()->getLuck()) {
-            return ['order' => ['first' => $heroPlayer, 'second' => $villainPlayer]];
+            return ["order" => ["first" => $heroPlayer, "second" => $villainPlayer]];
         } else {
-            return ['order' => ['first' => $villainPlayer, 'second' => $heroPlayer]];
+            return ["order" => ["first" => $villainPlayer, "second" => $heroPlayer]];
         }
     }
 }
