@@ -140,6 +140,7 @@ class Round
         return $this;
     }
 
+
     public function printRoundEvents()
     {
         $attackerName = $this->attacker->getName();
@@ -150,19 +151,17 @@ class Round
         if ($this->isDefenderLucky) {
             echo $attackerName . ' miss his hit and the' . $defenderName . ' takes no damage';
         } else {
-            if (!empty($roundDetails['specialSkills'])) {
-                //for - iterate over them
-                echo $attackerName . 'uses X skill';
+            if (!empty($this->attackerSkillsUsed)) {
+                echo $attackerName . 'uses '. $this->attackerSkillsUsed .' skill';
+            }
+
+            if (!empty($this->defenderSkillsUsed)) {
+                echo $defenderName . 'uses '. $this->defenderSkillsUsed .' skill';
             }
 
             echo $defenderName . 'takes ' . $this->damage . ' damage';
+
             echo $defenderName . 'has ' . $this->defender->getStats()->getHealth() . ' left';
         }
     }
-
-    public function applySkill(Skill $skill) {
-//        $skill->effect()
-
-    }
-
 }

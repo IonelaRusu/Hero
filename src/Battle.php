@@ -49,11 +49,15 @@ class Battle
         if ($roundDefenderLuck <= $defender->getStats()->getLuck()) {
             $round->setIsDefenderLucky(true);
         } else {
+            $finalDamage = 0;
             $attackerStrength = $this->getAttackerStrengthInCurrentRound($attacker, $round);
-
             $defenderDefence = $defender->getStats()->getDefence();
-            $damage = $attackerStrength - $defenderDefence;
-            $finalDamage = $this->getDefenderDamageInCurrentRound($defender, $damage);
+
+            if ($attackerStrength > $defenderDefence) {
+                $damage = $attackerStrength - $defenderDefence;
+                $finalDamage = $this->getDefenderDamageInCurrentRound($defender, $damage);
+            }
+
             $round->setDamage($finalDamage);
         }
 
@@ -69,6 +73,7 @@ class Battle
                 if ($skill->getType() === 'attack') {
                     $attackerSkillChance = rand(0, 100);
                     if ($attackerSkillChance <= $skill->getChance()) {
+                        $round->setAttackerSkillsUsed($skill->getName());
                         return $attacker->attack($round, $skill);
                     }
                 }
@@ -87,6 +92,7 @@ class Battle
                 $defenderSkillChance = rand(0, 100);
                 if ($skill->getType() === 'attack') {
                     if ($defenderSkillChance <= $skill->getChance()) {
+                        $round->setDefenderSkillsUsed($skill->getName());
                         return $defender->defend($round, $skill);
                     }
                 }
