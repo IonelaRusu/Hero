@@ -4,6 +4,7 @@ namespace App;
 
 use App\Players\FactoryProducer;
 use App\Players\Heroes\Hero;
+use App\Players\Player;
 use App\Players\Villains\Villain;
 use App\Strategies\HighestLuckStartStrategy;
 use App\Strategies\HighestSpeedStartStrategy;
@@ -48,8 +49,20 @@ class Game
             if (empty($playersOrder)) {
                 //check if still no players order, throw error
             }
+            $firstPlayer = $playersOrder['order']['first'];
+            $secondPlayer = $playersOrder['order']['second'];
 
-            $battle->fight($playersOrder['order']['first'], $playersOrder['order']['second']);
+            $this->printGamePlayers($firstPlayer, $secondPlayer);
+            $battle->fight($firstPlayer, $secondPlayer);
+        }
+    }
+    private function printGamePlayers($firstPlayer, $secondPlayer) {
+
+        if ($firstPlayer instanceof Player) {
+            echo "First player is a" . $firstPlayer->getType() . " named " . $firstPlayer->getName();
+        }
+        if ($secondPlayer instanceof Player) {
+            echo "Second player is a" . $firstPlayer->getType() . " named " . $firstPlayer->getName();
         }
     }
 }

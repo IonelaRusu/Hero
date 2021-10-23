@@ -34,43 +34,77 @@ class Battle
     public function fight(Player $firstPlayer, Player $secondPlayer)
     {
         $round = 1;
-        while (1) {
+        do  {
             if ($round % 2 === 1) {
+                $roundDefenderLuck = rand(0,100);
+                $roundDetails = [
+                    'isDefenderLucky'   => false,
+                    'specialSkillsUsed' => [],
+                    'damage' => 0,
+                ];
+
                 $firstPlayer->attack();
 
+                if ($roundDefenderLuck <= $secondPlayer->getStats()->getLuck()) {
+                    $roundDetails['isDefenderLucky'] = true;
+                } else {
+                    $firstPlayerStrength = $firstPlayer->getStats()->getStrength();
+                    $secondPlayerDefence = $secondPlayer->getStats()->getDefence();
 
-                $firstPlayerStrength = $firstPlayer->getStats()->getStrength();
-                $secondPlayerDefence = $secondPlayer->getStats()->getDefence();
+                    $damage = $firstPlayerStrength - $secondPlayerDefence;
+                    $secondPlayer->defend($damage);
 
-                $damage = $firstPlayerStrength - $secondPlayerDefence;
-                $secondPlayer->defend($damage);
+                    $roundDetails['damage'] = $damage;
+                }
 
-
-                $this->getRoundDetails($firstPlayer, $secondPlayer);
+                $this->printRoundEvents($firstPlayer, $secondPlayer, $roundDetails);
             } else {
+                $roundDefenderLuck = rand(0,100);
+                $roundDetails = [
+                    'isDefenderLucky'   => false,
+                    'specialSkillsUsed' => [],
+                    'damage' => 0,
+                ];
+
                 $secondPlayer->attack();
 
+                if ($roundDefenderLuck <= $secondPlayer->getStats()->getLuck()) {
+                    $roundDetails['isDefenderLucky'] = true;
+                } else {
+                    $secondPlayerStrength = $secondPlayer->getStats()->getStrength();
+                    $firstPlayerDefence = $firstPlayer->getStats()->getDefence();
 
-                $secondPlayerStrength = $secondPlayer->getStats()->getStrength();
-                $firstPlayerDefence = $firstPlayer->getStats()->getDefence();
+                    $damage = $secondPlayerStrength - $firstPlayerDefence;
+                    $firstPlayer->defend($damage);
+                }
 
-                $damage = $secondPlayerStrength - $firstPlayerDefence;
-                $firstPlayer->defend($damage);
-
-                $this->getRoundDetails($secondPlayer, $firstPlayer);
+                $this->printRoundEvents($firstPlayer, $secondPlayer, $roundDetails);
             }
 
             $this->getBattleDetails($firstPlayer, $secondPlayer, $round);
-        }
+            $round++;
+        } while ($round > 20);
     }
 
-    private function getRoundDetails($attacker, $defender)
+    private function printRoundEvents($attacker, $defender, $roundDetails)
     {
-        echo $attacker . 'attacks';
-        echo $attacker . 'uses X skill';
+        $attackerName = $attacker->getName();
+        $defenderName = $defender->getName();
 
-        echo $defender . 'takes Y damage';
-        echo $defender . 'has Z health left';
+        echo $attackerName . 'attacks';
+
+        if ($roundDetails['isDefenderLucky']) {
+            echo $attackerName . ' miss his hit and the' . $defenderName . ' takes no damage';
+        } else {
+            if (!empty($roundDetails['specialSkills'])) {
+                //for - iterate over them
+                echo $attackerName. 'uses X skill';
+            }
+
+
+            echo $defenderName . 'takes ' .  $roundDetails['damage'] .' damage';
+            echo $defenderName . 'has ' . $defender->getStats()->getHealth() .' left';
+        }
     }
 
     private function getBattleDetails(Player $firstPlayer, Player $secondPlayer, int $round)
