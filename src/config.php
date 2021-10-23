@@ -1,4 +1,7 @@
 <?php
+//Heroes
+
+//Orderus
 const ORDERUS_STATS = [
     'health'   => [
         'min' => 70,
@@ -23,9 +26,12 @@ const ORDERUS_STATS = [
 ];
 
 const ORDERUS_SKILLS = [
-    'attack' => ['strike' => 'RapidStrike'],
-    'defence' => ['shield' => 'MagicShield'],
+    'attack' => [ALL_SKILLS['attack'][0]['name']],
+    'defence' => [ALL_SKILLS['defence'][0]['name']],
 ];
+
+//Villains
+//BEAST
 
 const BEAST_STATS = [
     'health'   => [
@@ -50,4 +56,14 @@ const BEAST_STATS = [
     ],
 ];
 
-const BEAST_SKILLS = []
+const BEAST_SKILLS = [];
+
+//SKILLS
+const ALL_SKILLS = [
+    'attack'  => [
+        ['name' => 'RapidStrike', 'chance' => 10],
+    ],
+    'defence' => [
+        ['name' => 'MagicShield', 'chance' => 20],
+    ],
+];

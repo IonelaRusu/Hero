@@ -2,10 +2,9 @@
 
 namespace App\Strategies;
 
-use App\Players\Heroes\Hero;
-use App\Players\Villains\Villain;
+use App\Players\Player;
 
 interface StartStrategy
 {
-    public function getPlayersOrder(Hero $heroPlayer, Villain $villainPlayer): array;
+    public function getPlayersOrder(Player $heroPlayer, Player $villainPlayer): array;
 }

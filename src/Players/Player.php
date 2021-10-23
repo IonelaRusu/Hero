@@ -2,6 +2,9 @@
 
 namespace App\Players;
 
+use App\Round;
+use App\Skills\Skill;
+use App\Skills\SkillFactoryProducer;
 use App\Stats;
 
 abstract class Player
@@ -9,13 +12,34 @@ abstract class Player
     protected string $name;
     protected string $type;
     protected Stats $stats;
+    protected SkillFactoryProducer $skillFactoryProducer;
+    protected array $skills;
 
-    abstract public function attack(): int;
-
-    public function defend(int $damage): int
+    public function __construct()
     {
-        $newHealth = $this->getStats()->getHealth() - $damage;
+        $this->skillFactoryProducer = new SkillFactoryProducer();
+    }
+
+    public function attack(Round $round = null, Skill $skill = null): int
+    {
+        if (!is_null($round) && !is_null($skill)) {
+            return $skill->effect($round);
+        }
+
+        return $this->stats->getStrength();
+    }
+
+    public function defend(Round $round , Skill $skill = null): int
+    {
+        $finalDamage = $round->getDamage();
+        if (!is_null($round) && !is_null($skill)) {
+            $finalDamage = $skill->effect($round);
+        }
+
+        $newHealth = $this->getStats()->getHealth() - $finalDamage;
         $this->getStats()->setHealth($newHealth);
+
+        return $finalDamage;
     }
 
     public function lose(): string
@@ -49,4 +73,27 @@ abstract class Player
         return $this->type;
     }
 
+    /**
+     * @return array
+     */
+    public function getSkills(): array
+    {
+        return $this->skills;
+    }
+
+    public function generateSkills($playerDefinedSkills): array
+    {
+        if (empty($playerDefinedSkills)) {
+            return [];
+        }
+
+        $skills = [];
+        foreach($playerDefinedSkills as $skillType) {
+            $typeSkillFactory =  $this->skillFactoryProducer->getFactory(key($skillType));
+            foreach($skillType as $skillName) {
+                array_push($skills, $typeSkillFactory->getSkill($skillName));
+            }
+        }
+        return $skills;
+    }
 }

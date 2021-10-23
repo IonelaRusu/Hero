@@ -11,10 +11,6 @@ class Beast extends Villain
         parent::__construct();
         $this->name = 'Beast';
         $this->stats = new Stats(BEAST_STATS);
-    }
-
-    public function attack(): int
-    {
-        // TODO: Implement attack() method.
+        $this->skills = $this->skills = $this->generateSkills(BEAST_SKILLS);
     }
 }

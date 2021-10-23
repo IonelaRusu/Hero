@@ -8,7 +8,6 @@ use App\Players\Player;
 use App\Players\Villains\Villain;
 use App\Strategies\HighestLuckStartStrategy;
 use App\Strategies\HighestSpeedStartStrategy;
-use App\Strategies\StartStrategy;
 
 class Game
 {
@@ -39,12 +38,12 @@ class Game
 
     public function initiateBattle()
     {
-        $battle = new Battle($this->heroPlayer, $this->villainPlayer, new HighestSpeedStartStrategy());
-        $playersOrder = $battle->getPlayersOrderByStrategy();
+        $battle = new Battle(new HighestSpeedStartStrategy());
+        $playersOrder = $battle->getPlayersOrderByStrategy($this->heroPlayer, $this->villainPlayer);
 
         if (empty($playersOrder)) {
             $battle->setStrategy(new HighestLuckStartStrategy());
-            $playersOrder = $battle->getPlayersOrderByStrategy();
+            $playersOrder = $battle->getPlayersOrderByStrategy($this->heroPlayer, $this->villainPlayer);
 
             if (empty($playersOrder)) {
                 //check if still no players order, throw error
@@ -52,11 +51,11 @@ class Game
             $firstPlayer = $playersOrder['order']['first'];
             $secondPlayer = $playersOrder['order']['second'];
 
-            $this->printGamePlayers($firstPlayer, $secondPlayer);
+            $this->printGamePlayersOrder($firstPlayer, $secondPlayer);
             $battle->fight($firstPlayer, $secondPlayer);
         }
     }
-    private function printGamePlayers($firstPlayer, $secondPlayer) {
+    private function printGamePlayersOrder($firstPlayer, $secondPlayer) {
 
         if ($firstPlayer instanceof Player) {
             echo "First player is a" . $firstPlayer->getType() . " named " . $firstPlayer->getName();

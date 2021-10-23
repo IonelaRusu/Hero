@@ -6,6 +6,5 @@ namespace App\Players;
 
 abstract class AbstractPlayerFactory
 {
-   abstract public function getPlayer(string $playerType);
-
+   abstract public function getPlayer(string $playerName);
 }
