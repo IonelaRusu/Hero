@@ -10,12 +10,14 @@ use App\Players\Player;
  */
 abstract class Hero extends Player
 {
+    const HERO_TYPE = 'Hero';
+
     /**
      * Hero constructor.
      */
     public function __construct()
     {
         parent::__construct();
-        $this->type = "Hero";
+        $this->type = self::HERO_TYPE;
     }
 }

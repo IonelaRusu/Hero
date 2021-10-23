@@ -2,8 +2,12 @@
 
 namespace App;
 
+use App\Players\Heroes\Hero;
+use App\Players\Heroes\Orderus;
 use App\Players\PlayerFactoryProducer;
 use App\Players\Player;
+use App\Players\Villains\Beast;
+use App\Players\Villains\Villain;
 use App\Strategies\HighestLuckStartStrategy;
 use App\Strategies\HighestSpeedStartStrategy;
 use Exception;
@@ -51,14 +55,20 @@ class Game
      */
     private function createPlayers()
     {
-        $heroPlayerFactory = $this->playerFactoryProducer->getFactory("Hero");
-        $this->heroPlayer = $heroPlayerFactory->getPlayer("Orderus");
+        $heroPlayerFactory = $this->playerFactoryProducer->getFactory(Hero::HERO_TYPE);
+        if (is_null($heroPlayerFactory)) {
+            throw new Exception("Hero player could not be created!");
+        }
+        $this->heroPlayer = $heroPlayerFactory->getPlayer(Orderus::ORDERUS_NAME);
         if (is_null($this->heroPlayer)) {
             throw new Exception("Hero player could not be created!");
         }
 
-        $villainPlayerFactory = $this->playerFactoryProducer->getFactory("Villain");
-        $this->villainPlayer = $villainPlayerFactory->getPlayer("Beast");
+        $villainPlayerFactory = $this->playerFactoryProducer->getFactory(Villain::VILLAIN_TYPE);
+        if (is_null($villainPlayerFactory)) {
+            throw new Exception("Villain player could not be created!");
+        }
+        $this->villainPlayer = $villainPlayerFactory->getPlayer(Beast::BEAST_NAME);
         if (is_null($this->villainPlayer)) {
             throw new Exception("Villain player could not be created!");
         }

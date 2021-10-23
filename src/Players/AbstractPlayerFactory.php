@@ -13,5 +13,5 @@ abstract class AbstractPlayerFactory
      *
      * @return Player|null
      */
-    abstract protected function getPlayer(string $playerName): ?Player;
+    abstract public function getPlayer(string $playerName): ?Player;
 }

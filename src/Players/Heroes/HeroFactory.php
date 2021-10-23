@@ -22,7 +22,7 @@ class HeroFactory extends AbstractPlayerFactory
             return null;
         }
 
-        if ($playerName === "Orderus") {
+        if ($playerName === Orderus::ORDERUS_NAME) {
             return new Orderus();
         }
 

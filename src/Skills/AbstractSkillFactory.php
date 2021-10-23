@@ -13,5 +13,5 @@ abstract class AbstractSkillFactory
      *
      * @return Skill|null
      */
-    abstract protected function getSkill(string $skillName): ?Skill;
+    abstract public function getSkill(string $skillName): ?Skill;
 }

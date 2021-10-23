@@ -10,11 +10,13 @@ use App\Skills\Skill;
  */
 abstract class AttackSkill extends Skill
 {
+    const ATTACK_TYPE = 'attack';
+
     /**
      * AttackSkill constructor.
      */
     protected function __construct()
     {
-        $this->type = "attack";
+        $this->type = self::ATTACK_TYPE;
     }
 }

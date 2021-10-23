@@ -2,6 +2,8 @@
 
 namespace App\Players;
 
+use App\Players\Heroes\Hero;
+use App\Players\Villains\Villain;
 use App\Players\Heroes\HeroFactory;
 use App\Players\Villains\VillainFactory;
 
@@ -14,14 +16,22 @@ class PlayerFactoryProducer
     /**
      * @param $playerType
      *
-     * @return AbstractPlayerFactory
+     * @return AbstractPlayerFactory|null
      */
-    public function getFactory($playerType): AbstractPlayerFactory
+    public function getFactory($playerType): ?AbstractPlayerFactory
     {
-        if ($playerType === "Hero") {
+        if ($playerType === null) {
+            return null;
+        }
+
+        if ($playerType === Hero::HERO_TYPE) {
             return new HeroFactory();
-        } else {
+        }
+
+        if ($playerType === Villain::VILLAIN_TYPE) {
             return new VillainFactory();
         }
+
+        return null;
     }
 }

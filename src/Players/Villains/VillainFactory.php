@@ -22,7 +22,7 @@ class VillainFactory extends AbstractPlayerFactory
             return null;
         }
 
-        if ($playerName === "Beast") {
+        if ($playerName === Beast::BEAST_NAME) {
             return new Beast();
         }
 

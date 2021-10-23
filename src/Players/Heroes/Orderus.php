@@ -10,10 +10,16 @@ use App\Stats;
  */
 class Orderus extends Hero
 {
+    const ORDERUS_NAME = "Orderus";
+
+    /**
+     * Orderus constructor.
+     * @throws \Exception
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->name = "Orderus";
+        $this->name = self::ORDERUS_NAME;
         $this->stats = new Stats(ORDERUS_STATS);
         $this->skills = $this->generateSkills(ORDERUS_SKILLS);
     }

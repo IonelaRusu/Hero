@@ -36,7 +36,7 @@ const ORDERUS_STATS = [
 ];
 
 const ORDERUS_SKILLS = [
-    "attack" => [ALL_SKILLS["attack"][0]["name"]],
+    "attack"  => [ALL_SKILLS["attack"][0]["name"]],
     "defence" => [ALL_SKILLS["defence"][0]["name"]],
 ];
 
@@ -52,15 +52,15 @@ const BEAST_STATS = [
         "min" => 60,
         "max" => 90,
     ],
-    "defence" => [
+    "defence"  => [
         "min" => 40,
         "max" => 90,
     ],
-    "speed"   => [
+    "speed"    => [
         "min" => 40,
         "max" => 60,
     ],
-    "luck"    => [
+    "luck"     => [
         "min" => 25,
         "max" => 40,
     ],

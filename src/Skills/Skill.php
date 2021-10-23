@@ -27,7 +27,7 @@ abstract class Skill
      *
      * @return int
      */
-    abstract protected function effect(Round $round): int;
+    abstract public function effect(Round $round): int;
 
     /**
      * @return int
