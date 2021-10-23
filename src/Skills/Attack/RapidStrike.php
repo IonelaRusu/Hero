@@ -4,8 +4,15 @@ namespace App\Skills\Attack;
 
 use App\Round;
 
+/**
+ * Class RapidStrike
+ * @package App\Skills\Attack
+ */
 class RapidStrike extends AttackSkill
 {
+    /**
+     * RapidStrike constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -13,6 +20,11 @@ class RapidStrike extends AttackSkill
         $this->chance = ALL_SKILLS["attack"][0]["chance"];
     }
 
+    /**
+     * @param Round $round
+     *
+     * @return int
+     */
     public function effect(Round $round): int
     {
         return 2 * $round->getAttacker()->getStats()->getStrength();

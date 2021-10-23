@@ -2,7 +2,16 @@
 
 namespace App\Skills;
 
+/**
+ * Class AbstractSkillFactory
+ * @package App\Skills
+ */
 abstract class AbstractSkillFactory
 {
-    abstract public function getSkill(string $skillName): ?Skill;
+    /**
+     * @param string $skillName
+     *
+     * @return Skill|null
+     */
+    abstract protected function getSkill(string $skillName): ?Skill;
 }

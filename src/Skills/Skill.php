@@ -3,13 +3,31 @@
 namespace App\Skills;
 use App\Round;
 
+/**
+ * Class Skill
+ * @package App\Skills
+ */
 abstract class Skill
 {
+    /**
+     * @var int
+     */
     protected int $chance;
+    /**
+     * @var string
+     */
     protected string $type;
+    /**
+     * @var string
+     */
     protected string  $name;
 
-    abstract public function effect(Round $round): int;
+    /**
+     * @param Round $round
+     *
+     * @return int
+     */
+    abstract protected function effect(Round $round): int;
 
     /**
      * @return int

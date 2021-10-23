@@ -4,9 +4,16 @@ namespace App\Skills\Attack;
 
 use App\Skills\Skill;
 
+/**
+ * Class AttackSkill
+ * @package App\Skills\Attack
+ */
 abstract class AttackSkill extends Skill
 {
-    public function __construct()
+    /**
+     * AttackSkill constructor.
+     */
+    protected function __construct()
     {
         $this->type = "attack";
     }

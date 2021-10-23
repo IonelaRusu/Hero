@@ -2,11 +2,17 @@
 
 namespace App\Skills\Defence;
 
-use App\Stats;
 use App\Round;
 
+/**
+ * Class MagicShield
+ * @package App\Skills\Defence
+ */
 class MagicShield extends DefenceSkill
 {
+    /**
+     * MagicShield constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +20,11 @@ class MagicShield extends DefenceSkill
         $this->chance = ALL_SKILLS["defence"][0]["chance"];
     }
 
+    /**
+     * @param Round $round
+     *
+     * @return int
+     */
     public function effect(Round $round): int
     {
 

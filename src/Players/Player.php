@@ -9,17 +9,45 @@ use App\Stats;
 
 abstract class Player
 {
+    /**
+     * @var string
+     */
     protected string               $name;
+
+    /**
+     * @var string
+     */
     protected string               $type;
+
+    /**
+     * @var Stats
+     */
     protected Stats                $stats;
+
+    /**
+     * @var SkillFactoryProducer
+     */
     protected SkillFactoryProducer $skillFactoryProducer;
+
+    /**
+     * @var array
+     */
     protected array                $skills;
 
+    /**
+     * Player constructor.
+     */
     public function __construct()
     {
         $this->skillFactoryProducer = new SkillFactoryProducer();
     }
 
+    /**
+     * @param Round|null $round
+     * @param Skill|null $skill
+     *
+     * @return int
+     */
     public function attack(Round $round = null, Skill $skill = null): int
     {
         if (!is_null($round) && !is_null($skill)) {
@@ -29,6 +57,12 @@ abstract class Player
         return $this->stats->getStrength();
     }
 
+    /**
+     * @param Round      $round
+     * @param Skill|null $skill
+     *
+     * @return int
+     */
     public function defend(Round $round, Skill $skill = null): int
     {
         $finalDamage = $round->getDamage();
@@ -56,6 +90,9 @@ abstract class Player
         echo "<br>". "<b>" . $this->name . " wins!" . "</b>" . "<br>";
     }
 
+    /**
+     * @return Stats
+     */
     public function getStats(): Stats
     {
         return $this->stats;
@@ -85,9 +122,13 @@ abstract class Player
         return $this->skills;
     }
 
+    /**
+     * @param $playerDefinedSkills
+     *
+     * @return array
+     */
     public function generateSkills($playerDefinedSkills): array
     {
-
         if (empty($playerDefinedSkills)) {
             return [];
         }

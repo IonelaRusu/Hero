@@ -3,59 +3,79 @@
 namespace App;
 
 use App\Players\PlayerFactoryProducer;
-use App\Players\Heroes\Hero;
 use App\Players\Player;
-use App\Players\Villains\Villain;
 use App\Strategies\HighestLuckStartStrategy;
 use App\Strategies\HighestSpeedStartStrategy;
 use Exception;
-use Monolog\Logger;
 
+/**
+ * Class Game
+ * @package App
+ */
 class Game
 {
-    protected PlayerFactoryProducer $playerFactoryProducer;
-    protected Battle                $battle;
-    protected ?Hero                 $heroPlayer;
-    protected ?Villain              $villainPlayer;
-    protected Logger                $logger;
+    /**
+     * @var PlayerFactoryProducer
+     */
+    private PlayerFactoryProducer $playerFactoryProducer;
 
-    public function __construct(Logger $logger)
+    /**
+     * @var Player|null
+     */
+    private ?Player $heroPlayer;
+
+    /**
+     * @var Player|null
+     */
+    private ?Player $villainPlayer;
+
+    /**
+     * Game constructor.
+     */
+    public function __construct()
     {
         $this->playerFactoryProducer = new PlayerFactoryProducer();
-        $this->logger = $logger;
     }
 
+    /**
+     * @throws Exception
+     */
     public function start()
     {
         $this->createPlayers();
         $this->initiateBattle();
     }
 
+    /**
+     * @throws Exception
+     */
     private function createPlayers()
     {
         $heroPlayerFactory = $this->playerFactoryProducer->getFactory("Hero");
         $this->heroPlayer = $heroPlayerFactory->getPlayer("Orderus");
-        //        if ($this->heroPlayer) {
-        ////        //check if null and throw error
-        ////            $this->logger->error("Hero player could not be crated");
-        ////            throw new Exception("Hero player could not be crated");
-        //        }
+        if (is_null($this->heroPlayer)) {
+            throw new Exception("Hero player could not be created!");
+        }
 
         $villainPlayerFactory = $this->playerFactoryProducer->getFactory("Villain");
         $this->villainPlayer = $villainPlayerFactory->getPlayer("Beast");
-        //check if null and throw error
+        if (is_null($this->villainPlayer)) {
+            throw new Exception("Villain player could not be created!");
+        }
     }
 
-    public function initiateBattle()
+    /**
+     * @throws Exception
+     */
+    private function initiateBattle()
     {
         $battle = new Battle(new HighestSpeedStartStrategy());
         $playersOrder = $battle->getPlayersOrderByStrategy($this->heroPlayer, $this->villainPlayer);
-
         if (empty($playersOrder)) {
             $battle->setStrategy(new HighestLuckStartStrategy());
             $playersOrder = $battle->getPlayersOrderByStrategy($this->heroPlayer, $this->villainPlayer);
             if (empty($playersOrder)) {
-                //check if still no players order, throw error
+                throw new Exception("Could not establish players order!");
             }
         }
         $firstPlayer = $playersOrder["order"]["first"];
@@ -65,6 +85,10 @@ class Game
         $battle->fight($firstPlayer, $secondPlayer);
     }
 
+    /**
+     * @param $firstPlayer
+     * @param $secondPlayer
+     */
     private function printGamePlayersOrder($firstPlayer, $secondPlayer)
     {
         if ($firstPlayer instanceof Player) {

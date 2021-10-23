@@ -6,14 +6,48 @@ use App\Players\Player;
 
 class Round
 {
-    protected Player $attacker;
-    protected Player $defender;
-    protected int $damage;
-    protected ?string $attackerSkillsUsed;
-    protected ?string $defenderSkillsUsed;
-    protected bool $isDefenderLucky;
-    protected int $roundNumber;
+    /**
+     * @var Player
+     */
+    private Player $attacker;
 
+    /**
+     * @var Player
+     */
+    private Player $defender;
+
+    /**
+     * @var int
+     */
+    private int $damage;
+
+    /**
+     * @var string|null
+     */
+    private ?string $attackerSkillsUsed;
+
+    /**
+     * @var string|null
+     */
+    private ?string $defenderSkillsUsed;
+
+    /**
+     * @var bool
+     */
+    private bool $isDefenderLucky;
+
+    /**
+     * @var int
+     */
+    private int $roundNumber;
+
+    /**
+     * Round constructor.
+     *
+     * @param Player $attacker
+     * @param Player $defender
+     * @param int    $roundNumber
+     */
     public function __construct(Player $attacker, Player $defender, int $roundNumber)
     {
         $this->attacker = $attacker;
@@ -30,43 +64,11 @@ class Round
     }
 
     /**
-     * @return Player
-     */
-    public function getDefender(): Player
-    {
-        return $this->defender;
-    }
-
-    /**
      * @return int
      */
     public function getDamage(): int
     {
         return $this->damage;
-    }
-
-    /**
-     * @param Player $attacker
-     *
-     * @return Round
-     */
-    public function setAttacker(Player $attacker): Round
-    {
-        $this->attacker = $attacker;
-
-        return $this;
-    }
-
-    /**
-     * @param Player $defender
-     *
-     * @return Round
-     */
-    public function setDefender(Player $defender): Round
-    {
-        $this->defender = $defender;
-
-        return $this;
     }
 
     /**
@@ -82,14 +84,6 @@ class Round
     }
 
     /**
-     * @return string|null
-     */
-    public function getAttackerSkillsUsed(): ?string
-    {
-        return $this->attackerSkillsUsed;
-    }
-
-    /**
      * @param string|null $attackerSkillsUsed
      *
      * @return Round
@@ -99,14 +93,6 @@ class Round
         $this->attackerSkillsUsed = $attackerSkillsUsed;
 
         return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDefenderSkillsUsed(): ?string
-    {
-        return $this->defenderSkillsUsed;
     }
 
     /**
@@ -121,16 +107,6 @@ class Round
         return $this;
     }
 
-
-
-    /**
-     * @return bool
-     */
-    public function getIsDefenderLucky(): bool
-    {
-        return $this->isDefenderLucky;
-    }
-
     /**
      * @param bool $isDefenderLucky
      *
@@ -143,7 +119,9 @@ class Round
         return $this;
     }
 
-
+    /**
+     *  Print round events
+     */
     public function printRoundEvents()
     {
         $attackerName = $this->attacker->getName();

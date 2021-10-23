@@ -5,26 +5,54 @@ namespace App;
 use App\Players\Player;
 use App\Strategies\StartStrategy;
 
+/**
+ * Class Battle
+ * @package App
+ */
 class Battle
 {
-    protected StartStrategy $strategy;
+    /**
+     * @var StartStrategy
+     */
+    private StartStrategy $strategy;
 
+    /**
+     * Battle constructor.
+     *
+     * @param StartStrategy $strategy
+     */
     public function __construct(StartStrategy $strategy)
     {
         $this->strategy = $strategy;
     }
 
+    /**
+     * @param StartStrategy $strategy
+     */
     public function setStrategy(StartStrategy $strategy)
     {
         $this->strategy = $strategy;
     }
 
+    /**
+     * Get players order using a strategy
+     *
+     * @param Player $heroPlayer
+     * @param Player $villainPlayer
+     *
+     * @return array
+     */
     public function getPlayersOrderByStrategy(Player $heroPlayer, Player $villainPlayer): array
     {
         return $this->strategy->getPlayersOrder($heroPlayer, $villainPlayer);
     }
 
-
+    /**
+     * Players fight
+     *
+     * @param Player $firstPlayer
+     * @param Player $secondPlayer
+     */
     public function fight(Player $firstPlayer, Player $secondPlayer)
     {
         $roundNumber = 1;
@@ -35,7 +63,7 @@ class Battle
                 $this->generateRound($secondPlayer, $firstPlayer, $roundNumber);
             }
 
-            $this->getFightDetails($firstPlayer, $secondPlayer, $roundNumber);
+            $this->printFightDetails($firstPlayer, $secondPlayer, $roundNumber);
 
             $firstPlayerHealth = $firstPlayer->getStats()->getHealth();
             $secondPlayerHealth = $secondPlayer->getStats()->getHealth();
@@ -48,6 +76,13 @@ class Battle
         } while ($roundNumber <= 20);
     }
 
+    /**
+     * Generate round
+     *
+     * @param Player $attacker
+     * @param Player $defender
+     * @param        $roundNumber
+     */
     private function generateRound(Player $attacker, Player $defender, $roundNumber)
     {
         $round = new Round($attacker, $defender, $roundNumber);
@@ -73,6 +108,14 @@ class Battle
         $round->printRoundEvents();
     }
 
+    /**
+     *  Get attacker strength in the current round
+     *
+     * @param Player $attacker
+     * @param Round  $round
+     *
+     * @return int
+     */
     private function getAttackerStrengthInCurrentRound(Player $attacker, Round $round)
     {
         $attackerSkills = $attacker->getSkills();
@@ -83,16 +126,25 @@ class Battle
                     $attackerSkillChance = rand(0, 100);
                     if ($attackerSkillChance <= $skill->getChance()) {
                         $round->setAttackerSkillsUsed($skill->getName());
+
                         return $attacker->attack($round, $skill);
                     }
                 }
             }
         }
         $round->setAttackerSkillsUsed(null);
-        return $attacker->attack();
 
+        return $attacker->attack();
     }
 
+    /**
+     * Get defender damage in the current round
+     *
+     * @param Player $defender
+     * @param Round  $round
+     *
+     * @return int
+     */
     private function getDefenderDamageInCurrentRound(Player $defender, Round $round)
     {
         $defenderSkills = $defender->getSkills();
@@ -103,6 +155,7 @@ class Battle
                     $defenderSkillChance = rand(0, 100);
                     if ($defenderSkillChance <= $skill->getChance()) {
                         $round->setDefenderSkillsUsed($skill->getName());
+
                         return $defender->defend($round, $skill);
                     }
                 }
@@ -110,10 +163,18 @@ class Battle
         }
 
         $round->setDefenderSkillsUsed(null);
+
         return $defender->defend($round);
     }
 
-    private function getFightDetails(Player $firstPlayer, Player $secondPlayer, int $round)
+    /**
+     * Print battle fight details
+     *
+     * @param Player $firstPlayer
+     * @param Player $secondPlayer
+     * @param int    $round
+     */
+    private function printFightDetails(Player $firstPlayer, Player $secondPlayer, int $round)
     {
         $firstPlayerHealth = $firstPlayer->getStats()->getHealth();
         $secondPlayerHealth = $secondPlayer->getStats()->getHealth();

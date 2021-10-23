@@ -2,9 +2,16 @@
 
 namespace App\Players;
 
-
-
+/**
+ * Class AbstractPlayerFactory
+ * @package App\Players
+ */
 abstract class AbstractPlayerFactory
 {
-   abstract public function getPlayer(string $playerName): ?Player;
+    /**
+     * @param string $playerName
+     *
+     * @return Player|null
+     */
+    abstract protected function getPlayer(string $playerName): ?Player;
 }

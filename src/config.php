@@ -1,5 +1,5 @@
 <?php
-//SKILLS
+//Skills
 const ALL_SKILLS = [
     "attack"  => [
         ["name" => "RapidStrike", "chance" => 10],
@@ -10,6 +10,7 @@ const ALL_SKILLS = [
 ];
 
 //Heroes
+
 //Orderus
 const ORDERUS_STATS = [
     "health"   => [
@@ -40,8 +41,8 @@ const ORDERUS_SKILLS = [
 ];
 
 //Villains
-//BEAST
 
+//BEAST
 const BEAST_STATS = [
     "health"   => [
         "min" => 60,
