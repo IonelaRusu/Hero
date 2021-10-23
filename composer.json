@@ -2,7 +2,9 @@
     "name": "emag/hero",
     "description": "project",
     "type": "project",
-    "require": {},
+    "require": {
+        "monolog/monolog": "^2.3"
+    },
     "authors": [
         {
             "name": "Ionela Rusu",
