@@ -22,6 +22,11 @@ const ORDERUS_STATS = [
     ],
 ];
 
+const ORDERUS_SKILLS = [
+    'attack' => ['strike' => 'RapidStrike'],
+    'defence' => ['shield' => 'MagicShield'],
+];
+
 const BEAST_STATS = [
     'health'   => [
         'min' => 60,
@@ -44,3 +49,5 @@ const BEAST_STATS = [
         'max' => 40,
     ],
 ];
+
+const BEAST_SKILLS = []
