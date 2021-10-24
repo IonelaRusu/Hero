@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Skills;
 use App\Battle\Round;
@@ -27,7 +28,7 @@ abstract class Skill
      *
      * @return int
      */
-    abstract public function effect(Round $round): int;
+    abstract public function getEffect(Round $round): int;
 
     /**
      * @return int

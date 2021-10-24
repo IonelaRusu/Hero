@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Skills\Attack;
 
@@ -25,7 +26,7 @@ class RapidStrike extends AttackSkill
      *
      * @return int
      */
-    public function effect(Round $round): int
+    public function getEffect(Round $round): int
     {
         return 2 * $round->getAttacker()->getStats()->getStrength();
     }

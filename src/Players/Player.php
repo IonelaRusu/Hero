@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Players;
 
@@ -52,7 +53,7 @@ abstract class Player
     public function attack(Round $round = null, Skill $skill = null): int
     {
         if (!is_null($round) && !is_null($skill)) {
-            return $skill->effect($round);
+            return $skill->getEffect($round);
         }
 
         return $this->stats->getStrength();
@@ -68,7 +69,7 @@ abstract class Player
     {
         $finalDamage = $round->getDamage();
         if (!is_null($round) && !is_null($skill)) {
-            $finalDamage = $skill->effect($round);
+            $finalDamage = $skill->getEffect($round);
         }
 
         $newHealth = $this->getStats()->getHealth() - $finalDamage;

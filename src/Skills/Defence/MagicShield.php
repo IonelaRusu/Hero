@@ -1,8 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Skills\Defence;
 
 use App\Battle\Round;
+use Exception;
 
 /**
  * Class MagicShield
@@ -25,9 +27,8 @@ class MagicShield extends DefenceSkill
      *
      * @return int
      */
-    public function effect(Round $round): int
+    public function getEffect(Round $round): int
     {
-
-        return $round->getDamage() / 2;
+        return (int)floor($round->getDamage() / 2);
     }
 }
