@@ -37,15 +37,15 @@ class Stats
     /**
      * Stats constructor.
      *
-     * @param $intervalLimits
+     * @param $statsLimits
      */
-    public function __construct($intervalLimits)
+    public function __construct($statsLimits)
     {
-        $this->health = rand($intervalLimits["health"]["min"], $intervalLimits["health"]["max"]);
-        $this->strength = rand($intervalLimits["strength"]["min"], $intervalLimits["strength"]["max"]);
-        $this->defence = rand($intervalLimits["defence"]["min"], $intervalLimits["defence"]["max"]);
-        $this->speed = rand($intervalLimits["speed"]["min"], $intervalLimits["speed"]["max"]);
-        $this->luck = rand($intervalLimits["luck"]["min"], $intervalLimits["luck"]["max"]);
+        $this->health = rand($statsLimits["health"]["min"], $statsLimits["health"]["max"]);
+        $this->strength = rand($statsLimits["strength"]["min"], $statsLimits["strength"]["max"]);
+        $this->defence = rand($statsLimits["defence"]["min"], $statsLimits["defence"]["max"]);
+        $this->speed = rand($statsLimits["speed"]["min"], $statsLimits["speed"]["max"]);
+        $this->luck = rand($statsLimits["luck"]["min"], $statsLimits["luck"]["max"]);
     }
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types = 1);
 namespace App\Battle;
 
 use App\Players\Player;
-use App\Battle\Round;
+use App\Skills\Attack\AttackSkill;
+use App\Skills\Defence\DefenceSkill;
 use App\Strategies\StartStrategy;
 
 /**
@@ -83,9 +84,9 @@ class Battle
      *
      * @param Player $attacker
      * @param Player $defender
-     * @param        $roundNumber
+     * @param int    $roundNumber
      */
-    private function generateRound(Player $attacker, Player $defender, $roundNumber)
+    private function generateRound(Player $attacker, Player $defender, int $roundNumber)
     {
         $round = new Round($attacker, $defender, $roundNumber);
 
@@ -124,7 +125,7 @@ class Battle
 
         if (!empty($attackerSkills)) {
             foreach ($attackerSkills as $skill) {
-                if ($skill->getType() === "attack") {
+                if ($skill->getType() === AttackSkill::ATTACK_TYPE) {
                     $attackerSkillChance = rand(0, 100);
                     if ($attackerSkillChance <= $skill->getChance()) {
                         $round->setAttackerSkillsUsed($skill->getName());
@@ -153,7 +154,7 @@ class Battle
 
         if (!empty($defenderSkills)) {
             foreach ($defenderSkills as $skill) {
-                if ($skill->getType() === "defence") {
+                if ($skill->getType() === DefenceSkill::DEFENCE_TYPE) {
                     $defenderSkillChance = rand(0, 100);
                     if ($defenderSkillChance <= $skill->getChance()) {
                         $round->setDefenderSkillsUsed($skill->getName());

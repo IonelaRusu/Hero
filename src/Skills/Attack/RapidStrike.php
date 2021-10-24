@@ -11,13 +11,15 @@ use App\Battle\Round;
  */
 class RapidStrike extends AttackSkill
 {
+    const RAPID_STRIKE_NAME = 'RapidStrike';
+
     /**
      * RapidStrike constructor.
      */
     public function __construct()
     {
         parent::__construct();
-        $this->name = ALL_SKILLS["attack"][0]["name"];
+        $this->name = self::RAPID_STRIKE_NAME;
         $this->chance = ALL_SKILLS["attack"][0]["chance"];
     }
 

@@ -13,11 +13,11 @@ use App\Players\Player;
 class HeroFactory extends AbstractPlayerFactory
 {
     /**
-     * @param string $playerName
+     * @param string|null $playerName
      *
      * @return Player|null
      */
-    public function getPlayer(string $playerName): ?Player
+    public function getPlayer(?string $playerName): ?Player
     {
         if ($playerName === null) {
             return null;

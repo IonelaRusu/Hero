@@ -15,11 +15,11 @@ use App\Players\Villains\VillainFactory;
 class PlayerFactoryProducer
 {
     /**
-     * @param $playerType
+     * @param string|null $playerType
      *
      * @return AbstractPlayerFactory|null
      */
-    public function getFactory($playerType): ?AbstractPlayerFactory
+    public function getFactory(?string $playerType): ?AbstractPlayerFactory
     {
         if ($playerType === null) {
             return null;

@@ -6,7 +6,6 @@ namespace App\Players;
 use App\Battle\Round;
 use App\Skills\Skill;
 use App\Skills\SkillFactoryProducer;
-use App\Players\Stats;
 use Exception;
 
 abstract class Player
@@ -125,12 +124,12 @@ abstract class Player
     }
 
     /**
-     * @param $playerDefinedSkills
+     * @param array $playerDefinedSkills
      *
      * @throws Exception
      * @return array
      */
-    public function generateSkills($playerDefinedSkills): array
+    public function generateSkills(array $playerDefinedSkills): array
     {
         if (empty($playerDefinedSkills)) {
             return [];
@@ -144,6 +143,7 @@ abstract class Player
             }
             foreach ($skill as $skillName) {
                 $newSkill = $typeSkillFactory->getSkill($skillName);
+
                 if (is_null($newSkill)) {
                     throw new Exception("Skill could not be created!");
                 }

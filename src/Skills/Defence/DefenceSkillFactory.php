@@ -13,17 +13,17 @@ use App\Skills\Skill;
 class DefenceSkillFactory extends AbstractSkillFactory
 {
     /**
-     * @param string $skillName
+     * @param string|null $skillName
      *
      * @return Skill|null
      */
-    public function getSkill(string $skillName): ?Skill
+    public function getSkill(?string $skillName): ?Skill
     {
         if ($skillName === null) {
             return null;
         }
 
-        if ($skillName === "MagicShield") {
+        if ($skillName === MagicShield::MAGIC_SHIELD_NAME) {
             return new MagicShield();
         }
 

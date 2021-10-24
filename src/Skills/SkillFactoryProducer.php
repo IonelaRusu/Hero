@@ -11,11 +11,11 @@ use App\Skills\Defence\DefenceSkillFactory;
 class SkillFactoryProducer
 {
     /**
-     * @param $skillType
+     * @param string|null $skillType
      *
      * @return AbstractSkillFactory|null
      */
-    public function getFactory($skillType): ?AbstractSkillFactory
+    public function getFactory(?string $skillType): ?AbstractSkillFactory
     {
         if ($skillType === null) {
             return null;

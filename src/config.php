@@ -67,4 +67,3 @@ const BEAST_STATS = [
 ];
 
 const BEAST_SKILLS = [];
-

@@ -12,13 +12,15 @@ use Exception;
  */
 class MagicShield extends DefenceSkill
 {
+    const MAGIC_SHIELD_NAME = 'MagicShield';
+
     /**
      * MagicShield constructor.
      */
     public function __construct()
     {
         parent::__construct();
-        $this->name = ALL_SKILLS["defence"][0]["name"];
+        $this->name = self::MAGIC_SHIELD_NAME;
         $this->chance = ALL_SKILLS["defence"][0]["chance"];
     }
 
