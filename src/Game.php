@@ -13,6 +13,7 @@ use App\Players\Villains\Villain;
 use App\Strategies\HighestLuckStartStrategy;
 use App\Strategies\HighestSpeedStartStrategy;
 use Exception;
+use Monolog\Logger;
 
 /**
  * Class Game
@@ -36,11 +37,17 @@ class Game
     private ?Player $villainPlayer;
 
     /**
+     * @var Logger
+     */
+    private Logger $logger;
+
+    /**
      * Game constructor.
      */
-    public function __construct()
+    public function __construct(Logger $logger)
     {
         $this->playerFactoryProducer = new PlayerFactoryProducer();
+        $this->logger = $logger;
     }
 
     /**
@@ -74,6 +81,9 @@ class Game
         if (is_null($this->villainPlayer)) {
             throw new Exception("Villain player could not be created!");
         }
+
+        $this->logger->info((string)$this->heroPlayer);
+        $this->logger->info((string)$this->villainPlayer);
     }
 
     /**

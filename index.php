@@ -12,7 +12,7 @@ $logger = new Logger("default");
 $logger->pushHandler(new StreamHandler(__DIR__ . "/logs/app.log", Logger::DEBUG));
 
 try {
-    $game = new Game();
+    $game = new Game($logger);
     $game->start();
 } catch (Exception $e) {
     $logger->error($e->getMessage());

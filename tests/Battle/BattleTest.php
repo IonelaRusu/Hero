@@ -1,10 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace Battle;
 
 use App\Battle\Battle;
 use App\Players\Player;
-use App\Skills\Skill;
 use App\Strategies\StartStrategy;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,6 @@ class BattleTest extends TestCase
     protected MockObject $strategyMock;
     protected MockObject $player1Mock;
     protected MockObject $player2Mock;
-    protected MockObject $skillMock;
 
     protected function setUp(): void
     {
@@ -34,7 +33,6 @@ class BattleTest extends TestCase
         $this->player2Mock = $this->getMockBuilder(Player::class)
             ->onlyMethods(array('getSkills'))
             ->disableOriginalConstructor()->getMock();
-
     }
 
     public function testGetPlayersOrderByStrategy() {

@@ -99,4 +99,13 @@ class Stats
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return " Strength: {$this->strength}, Health: {$this->health}, Speed: {$this->speed}," .
+            " Defence: {$this->defence}, Luck: {$this->luck} ";
+    }
 }

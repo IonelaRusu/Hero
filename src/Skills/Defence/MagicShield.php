@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace App\Skills\Defence;
 
 use App\Battle\Round;
-use Exception;
 
 /**
  * Class MagicShield

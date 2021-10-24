@@ -153,4 +153,18 @@ abstract class Player
 
         return $skills;
     }
+
+    public function __toString()
+    {
+        $skills = '';
+        if (empty($this->skills)) {
+            $skills = 'not available';
+        } else {
+            foreach ($this->skills as $skill) {
+                $skills .= $skill;
+            }
+        }
+
+        return "Player is: <b>{$this->get}</b>, a {$this->type} player with {$this->stats} and skills {$skills}";
+    }
 }

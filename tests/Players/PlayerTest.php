@@ -158,7 +158,7 @@ class PlayerTest extends TestCase
     /**
      * @dataProvider skillsProvider
      */
-    public function testGenerateSkillsWithException()
+    public function testGenerateSkillsWithExceptionAtTypeSkillFactory(array $playerDefinedSkills)
     {
         $typeSkillFactoryMock = $this->getMockBuilder(AbstractSkillFactory::class)
             ->onlyMethods(array('getSkill'))
@@ -170,15 +170,41 @@ class PlayerTest extends TestCase
             ->willReturnOnConsecutiveCalls(null, null);
 
         $this->skillFactoryProducerMock
-            ->expects($this->never())
+            ->expects($this->once())
             ->method('getFactory')
             ->withAnyParameters()
             ->will($this->returnValue(null));
 
-
-        //ASTA NU MERGE
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Expected Exception Message');
+        $this->expectExceptionMessage("Skill could not be created!");
+
+        $this->playerClass->generateSkills($playerDefinedSkills);
+    }
+
+    /**
+     * @dataProvider skillsProvider
+     */
+    public function testGenerateSkillsWithExceptionAtSkillFactory(array $playerDefinedSkills)
+    {
+        $typeSkillFactoryMock = $this->getMockBuilder(AbstractSkillFactory::class)
+            ->onlyMethods(array('getSkill'))
+            ->disableOriginalConstructor()->getMock();
+
+        $typeSkillFactoryMock->expects($this->once())
+            ->method('getSkill')
+            ->withAnyParameters()
+            ->willReturnOnConsecutiveCalls(null, null);
+
+        $this->skillFactoryProducerMock
+            ->expects($this->once())
+            ->method('getFactory')
+            ->withAnyParameters()
+            ->will($this->returnValue($typeSkillFactoryMock));
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Skill could not be created!");
+
+        $this->playerClass->generateSkills($playerDefinedSkills);
     }
 
     public static function skillsProvider(): array
