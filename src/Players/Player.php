@@ -154,7 +154,10 @@ abstract class Player
         return $skills;
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         $skills = '';
         if (empty($this->skills)) {

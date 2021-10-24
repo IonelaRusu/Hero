@@ -1,12 +1,12 @@
 #Hero
 
-####Installation
+##Installation
 
 ```bash
 composer install
 ```
 
-####Short description of project structure
+##Short description of project structure
 This Game first creates two players, one from each category: one player from the "Hero" category,
 and another player from "Villain' category. Each player has its own Stats.
 Once we have created the players, the battle is being initialized.
@@ -31,13 +31,13 @@ Any skill must be in one of these two categories. Each special skill has a chanc
 The first player to reach at 0 health, loses the battle fight.
 If the game reaches 20 rounds, it will be stopped and the healthiest player will win.
 
-####Important concepts used:
+##Important concepts used:
  - Abstract Factory as design pattern, for both player creations and skill creations
  - Strategy as design pattern for managing the strategies for starting the battle fight.
 
-####About implementation
+##About implementation
 
-######Players
+- Players
 The PlayerFactoryProducer class gets the right factory in order to create a player from
 a certain category: Hero or Villain.
 
@@ -49,7 +49,7 @@ further extended by the concrete classes: Orerus and Beast.
 
 Another concrete player can be added.
 
-######Skills
+- Skills
 The SkillFactoryProducer class gets the right factory to create a skill from
 a certain category: Defence or Attack.
 
@@ -61,38 +61,38 @@ further extended by the concrete classes: MagicShield and RapidStrike.
 
 Another concrete skill can be added.
 
-######Strategies
+- Strategies
 StartStrategy is a common interface for HighestLuckStartStrategy and HighestSpeedStartStrategy.
 
 Another strategy can be added.
 
-######Round
+- Round
 The Round class is introduce to fill the need for a connection between battle and special skills.
 Maybe in the future, one complex special skill will be added, and that skill will involve knowing the information
 about the current round, what skills the opponent used, what stats the opponent has or the number of the current round
 in order to apply its effect properly.
 
-######Chance and Luck
+- Chance and Luck
 Both "Chance" and "Luck" are random numbers between an input interval limits which are compared to
 other random numbers (every time one new).
 The "Luck" comparison random number is generated on each round.
 The "Chance" comparison random number is generated on each round, on each skill.
 
-#####Entry point
+##Entry point
 ```bash
 index.php
 ```
 
-#####How to run Unit Tests
+##How to run Unit Tests
 ```bash
 ./vendor/bin/phpunit tests
 ```
 
-#####Things to improve in the future
+##Things to improve in the future
 - a better config structure for inputs values
 - more testing coverage and testing void functions through side effects
 
 
-#####Note
+##Note
 At each run the initial configuration of the players is logged.
 

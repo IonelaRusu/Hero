@@ -103,7 +103,7 @@ class Stats
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return " Strength: {$this->strength}, Health: {$this->health}, Speed: {$this->speed}," .
             " Defence: {$this->defence}, Luck: {$this->luck} ";

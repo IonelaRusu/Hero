@@ -78,7 +78,10 @@ abstract class Skill
         return $this;
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return " {$this->name} with chance {$this->chance}";
     }
