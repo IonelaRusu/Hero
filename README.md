@@ -1,4 +1,4 @@
-# Hero
+#Hero
 
 ####Installation
 
@@ -8,7 +8,8 @@ composer install
 
 ####Short description of project structure
 This Game first creates two players, one from each category: one player from the "Hero" category,
-and another player from "Villain' category. Once we have created the players, the battle is being initialized.
+and another player from "Villain' category. Each player has its own Stats.
+Once we have created the players, the battle is being initialized.
 
 For starting a battle, it is necessary to establish the starting strategy based on which the players
 will be ordered. Having a strategy, we can order the players and thus the fight can start.
@@ -71,6 +72,12 @@ Maybe in the future, one complex special skill will be added, and that skill wil
 about the current round, what skills the opponent used, what stats the opponent has or the number of the current round
 in order to apply its effect properly.
 
+######Chance and Luck
+Both "Chance" and "Luck" are random numbers between an input interval limits which are compared to
+other random numbers (every time one new).
+The "Luck" comparison random number is generated on each round.
+The "Chance" comparison random number is generated on each round, on each skill.
+
 #####Entry point
 ```bash
 index.php
@@ -88,3 +95,4 @@ index.php
 
 #####Note
 At each run the initial configuration of the players is logged.
+

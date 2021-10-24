@@ -165,6 +165,6 @@ abstract class Player
             }
         }
 
-        return "Player is: <b>{$this->name}</b>, a {$this->type} player with {$this->stats} and skills {$skills}";
+        return "Player is: {$this->name}, a {$this->type} player with {$this->stats} and skills {$skills}";
     }
 }
