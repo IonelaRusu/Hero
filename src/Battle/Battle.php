@@ -1,8 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Battle;
 
 use App\Players\Player;
+use App\Battle\Round;
 use App\Strategies\StartStrategy;
 
 /**

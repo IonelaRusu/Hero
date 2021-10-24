@@ -2,7 +2,7 @@
 
 namespace App\Skills\Defence;
 
-use App\Round;
+use App\Battle\Round;
 
 /**
  * Class MagicShield

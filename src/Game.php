@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Battle\Battle;
 use App\Players\Heroes\Hero;
 use App\Players\Heroes\Orderus;
 use App\Players\PlayerFactoryProducer;

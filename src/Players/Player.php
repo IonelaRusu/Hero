@@ -2,10 +2,10 @@
 
 namespace App\Players;
 
-use App\Round;
+use App\Battle\Round;
 use App\Skills\Skill;
 use App\Skills\SkillFactoryProducer;
-use App\Stats;
+use App\Players\Stats;
 use Exception;
 
 abstract class Player

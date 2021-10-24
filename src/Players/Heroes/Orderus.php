@@ -2,7 +2,7 @@
 
 namespace App\Players\Heroes;
 
-use App\Stats;
+use App\Players\Stats;
 
 /**
  * Class Orderus

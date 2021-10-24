@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Skills;
-use App\Round;
+use App\Battle\Round;
 
 /**
  * Class Skill

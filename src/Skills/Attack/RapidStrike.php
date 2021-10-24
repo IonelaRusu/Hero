@@ -2,7 +2,7 @@
 
 namespace App\Skills\Attack;
 
-use App\Round;
+use App\Battle\Round;
 
 /**
  * Class RapidStrike

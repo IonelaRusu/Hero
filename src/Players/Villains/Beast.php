@@ -2,7 +2,7 @@
 
 namespace App\Players\Villains;
 
-use App\Stats;
+use App\Players\Stats;
 
 /**
  * Class Beast

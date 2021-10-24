@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Battle;
 
 use App\Players\Player;
 
