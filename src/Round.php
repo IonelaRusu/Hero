@@ -134,8 +134,8 @@ class Round
             echo "<b>" . $attackerName . "</b>" . " miss his hit and the " . "<b>" . $defenderName . "</b>"
                 . " takes no damage" . "<br>";
 
-            echo "<b>" . $defenderName . "</b>" . " has "
-                . $this->defender->getStats()->getHealth() . " health left" . "<br>";
+            echo "<b>" . $defenderName . "</b>" . " still has "
+                . $this->defender->getStats()->getHealth() . " health" . "<br>";
 
         } else {
             if (!empty($this->attackerSkillsUsed)) {

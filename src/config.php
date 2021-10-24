@@ -54,7 +54,7 @@ const BEAST_STATS = [
     ],
     "defence"  => [
         "min" => 40,
-        "max" => 90,
+        "max" => 60,
     ],
     "speed"    => [
         "min" => 40,

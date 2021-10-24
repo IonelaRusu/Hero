@@ -13,17 +13,17 @@ abstract class Player
     /**
      * @var string
      */
-    protected string               $name;
+    protected string $name;
 
     /**
      * @var string
      */
-    protected string               $type;
+    protected string $type;
 
     /**
      * @var Stats
      */
-    protected Stats                $stats;
+    protected Stats $stats;
 
     /**
      * @var SkillFactoryProducer
@@ -33,7 +33,7 @@ abstract class Player
     /**
      * @var array
      */
-    protected array                $skills;
+    protected array $skills;
 
     /**
      * Player constructor.

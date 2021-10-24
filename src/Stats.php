@@ -2,14 +2,42 @@
 
 namespace App;
 
+/**
+ * Class Stats
+ * @package App
+ */
 class Stats
 {
+    /**
+     * @var int
+     */
     protected $health;
+
+    /**
+     * @var int
+     */
     protected $strength;
+
+    /**
+     * @var int
+     */
     protected $defence;
+
+    /**
+     * @var int
+     */
     protected $speed;
+
+    /**
+     * @var int
+     */
     protected $luck;
 
+    /**
+     * Stats constructor.
+     *
+     * @param $intervalLimits
+     */
     public function __construct($intervalLimits)
     {
         $this->health = rand($intervalLimits["health"]["min"], $intervalLimits["health"]["max"]);
@@ -70,53 +98,4 @@ class Stats
 
         return $this;
     }
-
-    /**
-     * @param int $strength
-     *
-     * @return Stats
-     */
-    public function setStrength(int $strength): Stats
-    {
-        $this->strength = $strength;
-
-        return $this;
-    }
-
-    /**
-     * @param int $defence
-     *
-     * @return Stats
-     */
-    public function setDefence(int $defence): Stats
-    {
-        $this->defence = $defence;
-
-        return $this;
-    }
-
-    /**
-     * @param int $speed
-     *
-     * @return Stats
-     */
-    public function setSpeed(int $speed): Stats
-    {
-        $this->speed = $speed;
-
-        return $this;
-    }
-
-    /**
-     * @param int $luck
-     *
-     * @return Stats
-     */
-    public function setLuck(int $luck): Stats
-    {
-        $this->luck = $luck;
-
-        return $this;
-    }
-
 }

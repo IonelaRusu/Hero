@@ -20,7 +20,7 @@ abstract class Skill
     /**
      * @var string
      */
-    protected string  $name;
+    protected string $name;
 
     /**
      * @param Round $round
