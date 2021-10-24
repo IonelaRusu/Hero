@@ -6,7 +6,7 @@ namespace App\Skills\Attack;
 use App\Skills\AbstractSkillFactory;
 use App\Skills\Skill;
 
-class AttackSkillFactory extends AbstractSkillFactory
+class AttackSkillFactory implements AbstractSkillFactory
 {
     /**
      * @param string|null $skillName

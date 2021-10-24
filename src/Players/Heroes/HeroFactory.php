@@ -10,7 +10,7 @@ use App\Players\Player;
  * Class HeroFactory
  * @package App\Players\Heroes
  */
-class HeroFactory extends AbstractPlayerFactory
+class HeroFactory implements AbstractPlayerFactory
 {
     /**
      * @param string|null $playerName

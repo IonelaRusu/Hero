@@ -10,7 +10,7 @@ use App\Skills\Skill;
  * Class DefenceSkillFactory
  * @package App\Skills\Defence
  */
-class DefenceSkillFactory extends AbstractSkillFactory
+class DefenceSkillFactory implements AbstractSkillFactory
 {
     /**
      * @param string|null $skillName

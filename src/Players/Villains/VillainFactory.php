@@ -9,7 +9,7 @@ use App\Players\Player;
  * Class VillainFactory
  * @package App\Players\Villains
  */
-class VillainFactory extends AbstractPlayerFactory
+class VillainFactory implements AbstractPlayerFactory
 {
     /**
      * @param string|null $playerName
